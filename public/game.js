@@ -463,7 +463,7 @@ function drawMenu(t) {
   ctx.fillStyle = g; ctx.fillText('STAR HOPPER', 0, 0); ctx.restore();
   const f = clamp(W / 34, 14, 20), y0 = H * 0.7;
   text(touchMode ? 'Drag to fly  \u2022  DASH button smashes rocks' : 'Mouse / WASD / arrows to fly  \u2022  Click / SPACE to dash', W / 2, y0, f, 'rgba(255,255,255,0.85)', 'center');
-  text('Grab stars, chain combos, dash through asteroids!', W / 2, y0 + f * 1.7, f, 'rgba(255,255,255,0.6)', 'center');
+  text((W < 520 ? 'Grab stars. Chain combos. Smash rocks!' : 'Grab stars, chain combos, dash through asteroids!'), W / 2, y0 + f * 1.7, f, 'rgba(255,255,255,0.6)', 'center');
   text('Best: ' + best, W / 2, y0 + f * 3.6, f * 1.1, '#ffe66d', 'center');
   ctx.globalAlpha = 0.6 + 0.4 * Math.sin(t * 5);
   text(touchMode ? 'TAP TO START' : 'PRESS SPACE OR CLICK TO START', W / 2, H * 0.9, f * 1.2, '#7df9ff', 'center');
