@@ -75,6 +75,9 @@ module.exports = async ({ url, newPage, shot, assert, sleep, log }) => {
 
   // --- game over + retry ---
   await page.evaluate(() => { __game.setLives(1); __game.clearInvuln(); __game.dropRock(0, 0); });
+  await sleep(200);
+  // a shield (given earlier) may have eaten the first rock; hit again to be sure
+  await page.evaluate(() => { __game.clearInvuln(); __game.dropRock(0, 0); });
   await sleep(350);
   assert(await page.evaluate(() => __game.state === 'over'), 'losing the last life ends the game');
   await shot(page, '4-gameover');
