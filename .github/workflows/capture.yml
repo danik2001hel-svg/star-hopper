@@ -1,0 +1,29 @@
+name: capture
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: Page URL to capture
+        required: true
+      script:
+        description: Optional playtest script path in the repo
+        required: false
+        default: ""
+permissions:
+  contents: read
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install playwright-core
+        run: npm install --no-save --no-audit --no-fund playwright-core@1.49.1
+      - name: Capture
+        env:
+          CAPTURE_URL: ${{ inputs.url }}
+          CAPTURE_SCRIPT: ${{ inputs.script }}
+        run: node .claudex/capture.cjs
